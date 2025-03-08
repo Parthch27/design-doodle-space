@@ -65,8 +65,8 @@ const Index = () => {
         </div>
         
         {/* Recently Uploaded and Popular Section */}
-        <div className="section-container py-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="section-container py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="col-span-1">
               <RecentlyUploaded />
             </div>
