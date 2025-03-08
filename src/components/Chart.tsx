@@ -1,6 +1,8 @@
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 import { cn } from "@/lib/utils";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 const data = [
   { month: 'Jan', visitors: 4000, revenue: 2400 },
@@ -17,26 +19,71 @@ interface ChartProps {
 }
 
 const Chart = ({ className }: ChartProps) => {
+  const [chartType, setChartType] = useState<'bar' | 'line'>('bar');
+
   return (
-    <div className={cn("w-full h-[300px]", className)}>
+    <div className={cn("w-full", className)}>
+      <div className="mb-4 flex justify-between items-center">
+        <div>
+          <h3 className="font-medium">Traffic and Revenue Overview</h3>
+          <p className="text-sm text-muted-foreground">Monthly analysis for the first half of the year</p>
+        </div>
+        <div className="flex space-x-2">
+          <Button 
+            size="sm" 
+            variant={chartType === 'bar' ? 'default' : 'outline'} 
+            onClick={() => setChartType('bar')}
+          >
+            Bar Chart
+          </Button>
+          <Button 
+            size="sm" 
+            variant={chartType === 'line' ? 'default' : 'outline'} 
+            onClick={() => setChartType('line')}
+          >
+            Line Chart
+          </Button>
+        </div>
+      </div>
+      
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="visitors" fill="#8884d8" name="Monthly Visitors" />
-          <Bar dataKey="revenue" fill="#82ca9d" name="Revenue ($)" />
-        </BarChart>
+        {chartType === 'bar' ? (
+          <BarChart
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="visitors" fill="#8884d8" name="Monthly Visitors" />
+            <Bar dataKey="revenue" fill="#82ca9d" name="Revenue ($)" />
+          </BarChart>
+        ) : (
+          <LineChart
+            data={data}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="visitors" stroke="#8884d8" name="Monthly Visitors" />
+            <Line type="monotone" dataKey="revenue" stroke="#82ca9d" name="Revenue ($)" />
+          </LineChart>
+        )}
       </ResponsiveContainer>
     </div>
   );

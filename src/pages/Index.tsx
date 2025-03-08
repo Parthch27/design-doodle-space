@@ -1,7 +1,6 @@
 
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
-import ChatSection from "@/components/ChatSection";
 import InfoSidebar from "@/components/InfoSidebar";
 import Description from "@/components/Description";
 import AdBox from "@/components/AdBox";
@@ -10,6 +9,8 @@ import InterestBox from "@/components/InterestBox";
 import RecentlyUploaded from "@/components/RecentlyUploaded";
 import PopularSection from "@/components/PopularSection";
 import Footer from "@/components/Footer";
+import Chart from "@/components/Chart";
+import SectionHeading from "@/components/SectionHeading";
 
 const Index = () => {
   return (
@@ -20,11 +21,18 @@ const Index = () => {
         {/* Ad Banner Section */}
         <AdBanner />
         
-        {/* Chat and Info Section */}
+        {/* Chart and Info Section */}
         <div className="section-container py-0">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="col-span-1 md:col-span-3">
-              <ChatSection />
+              <div className="w-full animate-fade-up animation-delay-200">
+                <div className="section-container py-4">
+                  <SectionHeading title="Website Analytics" accent={true} />
+                  <div className="bg-background rounded-lg border shadow-sm p-4">
+                    <Chart className="h-[350px]" />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="col-span-1">
               <InfoSidebar />
