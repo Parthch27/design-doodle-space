@@ -1,12 +1,75 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Header from "@/components/Header";
+import AdBanner from "@/components/AdBanner";
+import ChatSection from "@/components/ChatSection";
+import InfoSidebar from "@/components/InfoSidebar";
+import Description from "@/components/Description";
+import AdBox from "@/components/AdBox";
+import TaboolaSection from "@/components/TaboolaSection";
+import InterestBox from "@/components/InterestBox";
+import RecentlyUploaded from "@/components/RecentlyUploaded";
+import PopularSection from "@/components/PopularSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      <main className="flex-1">
+        {/* Ad Banner Section */}
+        <AdBanner />
+        
+        {/* Chat and Info Section */}
+        <div className="section-container py-0">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="col-span-1 md:col-span-3">
+              <ChatSection />
+            </div>
+            <div className="col-span-1">
+              <InfoSidebar />
+            </div>
+          </div>
+        </div>
+        
+        {/* Description and Ad Box Section */}
+        <div className="section-container py-0">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="col-span-1 md:col-span-3">
+              <Description />
+            </div>
+            <div className="col-span-1">
+              <AdBox />
+            </div>
+          </div>
+        </div>
+        
+        {/* Taboola and Interest Box Section */}
+        <div className="section-container py-0">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="col-span-1 md:col-span-3">
+              <TaboolaSection />
+            </div>
+            <div className="col-span-1">
+              <InterestBox />
+            </div>
+          </div>
+        </div>
+        
+        {/* Recently Uploaded and Popular Section */}
+        <div className="section-container py-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="col-span-1">
+              <RecentlyUploaded />
+            </div>
+            <div className="col-span-1">
+              <PopularSection />
+            </div>
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
     </div>
   );
 };
