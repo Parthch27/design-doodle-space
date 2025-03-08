@@ -45,44 +45,44 @@ const PopularSection = ({ className }: PopularSectionProps) => {
 
   return (
     <div className={cn("w-full animate-slide-in-right animation-delay-800", className)}>
-      <div className="py-4">
+      <div className="py-3">
         <SectionHeading title="Popular" />
-        <div className="space-y-6">
+        <div className="space-y-4">
           {popularPosts.map((post, index) => (
             <div 
               key={index} 
-              className="bg-background rounded-lg border shadow-sm p-5 animate-fade-in cursor-pointer hover:shadow-md transition-shadow"
+              className="bg-background rounded-lg border shadow-sm p-3 animate-fade-in cursor-pointer hover:shadow-md transition-shadow"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {post.trending && (
-                <div className="flex items-center text-primary text-xs font-medium mb-2 gap-1">
-                  <TrendingUp className="h-3.5 w-3.5" />
+                <div className="flex items-center text-primary text-xs font-medium mb-1 gap-1">
+                  <TrendingUp className="h-3 w-3" />
                   <span>Trending</span>
                 </div>
               )}
               
-              <div className="flex items-center gap-3 mb-2">
-                <Avatar className="h-8 w-8 border">
+              <div className="flex items-center gap-2 mb-1">
+                <Avatar className="h-6 w-6 border">
                   <img src={post.avatar} alt={post.author} />
                 </Avatar>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-xs text-muted-foreground">
                   <span className="font-medium text-foreground">{post.author}</span> • {post.date}
                 </div>
               </div>
               
-              <h3 className="text-lg font-semibold mb-2">{post.title}</h3>
-              <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
+              <h3 className="text-sm font-semibold mb-1">{post.title}</h3>
+              <p className="text-muted-foreground text-xs mb-2 line-clamp-1">{post.excerpt}</p>
               
               <div className="flex justify-between items-center">
-                <span className="text-xs px-3 py-1 bg-secondary rounded-full">{post.category}</span>
-                <div className="flex items-center gap-4">
-                  <Button variant="ghost" size="sm" className="gap-1.5">
-                    <Share2 className="h-4 w-4" />
+                <span className="text-xs px-2 py-0.5 bg-secondary rounded-full">{post.category}</span>
+                <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm" className="h-6 px-1.5 text-xs gap-1">
+                    <Share2 className="h-3 w-3" />
                     <span>Share</span>
                   </Button>
-                  <Button variant="ghost" size="sm" className="gap-1.5">
-                    <MessageSquare className="h-4 w-4" />
-                    <span>{post.comments} Comments</span>
+                  <Button variant="ghost" size="sm" className="h-6 px-1.5 text-xs gap-1">
+                    <MessageSquare className="h-3 w-3" />
+                    <span>{post.comments}</span>
                   </Button>
                 </div>
               </div>
