@@ -1,5 +1,5 @@
 
-import { Info } from "lucide-react";
+import { FileText, Globe, User } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { cn } from "@/lib/utils";
 
@@ -9,10 +9,21 @@ interface InfoSidebarProps {
 
 const InfoSidebar = ({ className }: InfoSidebarProps) => {
   const infoItems = [
-    { title: "Active Users", value: "1,245" },
-    { title: "New Topics", value: "36" },
-    { title: "Notifications", value: "8" },
-    { title: "Updates", value: "3" },
+    { 
+      title: "Source", 
+      value: "Wireframe Analytics", 
+      icon: FileText 
+    },
+    { 
+      title: "Published By", 
+      value: "Wireframe Media", 
+      icon: User 
+    },
+    { 
+      title: "Region", 
+      value: "North America", 
+      icon: Globe 
+    },
   ];
 
   return (
@@ -29,7 +40,7 @@ const InfoSidebar = ({ className }: InfoSidebarProps) => {
               >
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <Info className="h-3 w-3" />
+                    <item.icon className="h-3 w-3" />
                   </div>
                   <span className="text-sm">{item.title}</span>
                 </div>

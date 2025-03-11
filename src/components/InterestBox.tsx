@@ -1,7 +1,6 @@
 
-import { Heart, Star } from "lucide-react";
+import { useEffect, useState } from "react";
 import SectionHeading from "./SectionHeading";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface InterestBoxProps {
@@ -9,38 +8,76 @@ interface InterestBoxProps {
 }
 
 const InterestBox = ({ className }: InterestBoxProps) => {
-  const interestItems = [
-    { title: "Design", count: 128 },
-    { title: "Technology", count: 85 },
-    { title: "Development", count: 64 },
-    { title: "Interface", count: 42 },
+  const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const infographics = [
+    {
+      title: "Tech Trends",
+      imageSrc: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=300&h=200",
+      description: "Latest technology trends in 2023"
+    },
+    {
+      title: "Digital Work",
+      imageSrc: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=300&h=200",
+      description: "Remote work statistics and insights"
+    },
+    {
+      title: "Programming",
+      imageSrc: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=300&h=200",
+      description: "Most popular programming languages"
+    },
+    {
+      title: "Tech Hardware",
+      imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&h=200",
+      description: "New hardware developments"
+    }
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % infographics.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [infographics.length]);
 
   return (
     <div className={cn("w-full animate-slide-in-right animation-delay-600", className)}>
       <div className="py-4">
-        <SectionHeading title="Interest Me" />
-        <div className="bg-background rounded-lg border shadow-sm">
-          <div className="p-4 space-y-3">
-            {interestItems.map((item, index) => (
+        <SectionHeading title="Infographics" />
+        <div className="bg-background rounded-lg border shadow-sm overflow-hidden">
+          <div className="relative h-[200px] w-full">
+            {infographics.map((infographic, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`absolute top-0 left-0 w-full h-full transition-opacity duration-700 ${
+                  index === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <Star className="h-3 w-3" />
-                  </div>
-                  <span className="text-sm">{item.title}</span>
+                <img
+                  src={infographic.imageSrc}
+                  alt={infographic.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-2">
+                  <h4 className="text-white text-xs font-medium">{infographic.title}</h4>
+                  <p className="text-white/80 text-xs mt-0.5">{infographic.description}</p>
                 </div>
-                <span className="text-xs bg-secondary px-2 py-0.5 rounded-full">{item.count}</span>
               </div>
             ))}
-            <Button size="sm" variant="outline" className="w-full mt-2">
-              <Heart className="h-3 w-3 mr-2" />
-              <span className="text-xs">Follow Interests</span>
-            </Button>
+            
+            {/* Indicators */}
+            <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-1 z-10">
+              {infographics.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    index === currentSlide ? "bg-white" : "bg-white/40"
+                  }`}
+                  onClick={() => setCurrentSlide(index)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
