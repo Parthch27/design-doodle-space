@@ -1,77 +1,81 @@
 
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
-import AdBanner from "@/components/AdBanner";
-import InfoSidebar from "@/components/InfoSidebar";
-import Description from "@/components/Description";
-import AdBox from "@/components/AdBox";
-import TaboolaSection from "@/components/TaboolaSection";
-import InterestBox from "@/components/InterestBox";
-import RecentlyUploaded from "@/components/RecentlyUploaded";
-import PopularSection from "@/components/PopularSection";
 import Footer from "@/components/Footer";
-import Chart from "@/components/Chart";
-import SectionHeading from "@/components/SectionHeading";
+import Sidebar from "@/components/Sidebar";
+import PostList from "@/components/PostList";
+import FilterCategories from "@/components/FilterCategories";
+import PopularThreads from "@/components/PopularThreads";
+import SubscribeBox from "@/components/SubscribeBox";
 
 const Index = () => {
+  // Mock data - in a real application this would come from an API
+  const posts = [
+    {
+      id: 1,
+      title: "The Future of Interface Design",
+      excerpt: "Exploring new innovations and methodologies that will shape the next generation of digital interfaces and interaction models.",
+      author: {
+        name: "Sarah Johnson",
+        avatar: "/lovable-uploads/a4d243ee-ac02-49f4-8892-10af603218a2.png",
+        tag: "r/Design"
+      },
+      category: "Design",
+      comments: 64,
+      date: "September 15, 2023",
+      upvotes: 249,
+      isPinned: true
+    },
+    {
+      id: 2,
+      title: "Artificial Intelligence in Everyday Life",
+      excerpt: "How AI is quietly revolutionizing the products and services we use daily.",
+      author: {
+        name: "Alex Morgan",
+        avatar: "/placeholder.svg",
+        tag: "r/Technology"
+      },
+      category: "Technology",
+      comments: 23,
+      date: "November 15, 2023",
+      upvotes: 89
+    },
+    {
+      id: 3,
+      title: "Sustainable Business Practices for the Future",
+      excerpt: "How companies are reimagining sustainability as a core business principle.",
+      author: {
+        name: "James Chen",
+        avatar: "/placeholder.svg",
+        tag: "r/Business"
+      },
+      category: "Business",
+      comments: 23,
+      date: "November 10, 2023",
+      upvotes: 89
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       
       <main className="flex-1">
-        {/* Ad Banner Section */}
-        <AdBanner />
-        
-        {/* Chart and Info Section */}
-        <div className="section-container py-0">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="col-span-1 md:col-span-3">
-              <div className="w-full animate-fade-up animation-delay-200">
-                <div className="section-container py-4">
-                  <SectionHeading title="Website Analytics" accent={true} />
-                  <div className="bg-background rounded-lg border shadow-sm p-4">
-                    <Chart className="h-[350px]" />
-                  </div>
-                </div>
+        <div className="section-container py-6">
+          <div className="flex flex-col md:flex-row gap-6">
+            <Sidebar className="flex-shrink-0" />
+            
+            <div className="flex-1">
+              <FilterCategories />
+              <div className="mb-6">
+                <h2 className="text-xl font-bold mb-4">Latest Posts</h2>
+                <PostList posts={posts} />
               </div>
             </div>
-            <div className="col-span-1">
-              <InfoSidebar />
-            </div>
-          </div>
-        </div>
-        
-        {/* Description and Ad Box Section */}
-        <div className="section-container py-0">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="col-span-1 md:col-span-3">
-              <Description />
-            </div>
-            <div className="col-span-1">
-              <AdBox />
-            </div>
-          </div>
-        </div>
-        
-        {/* Taboola and Interest Box Section */}
-        <div className="section-container py-0">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="col-span-1 md:col-span-3">
-              <TaboolaSection />
-            </div>
-            <div className="col-span-1">
-              <InterestBox />
-            </div>
-          </div>
-        </div>
-        
-        {/* Recently Uploaded and Popular Section */}
-        <div className="section-container py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="col-span-1">
-              <RecentlyUploaded />
-            </div>
-            <div className="col-span-1">
-              <PopularSection />
+            
+            <div className="w-full md:w-80 space-y-6">
+              <SubscribeBox />
+              <PopularThreads />
             </div>
           </div>
         </div>
